@@ -2,6 +2,7 @@ package com.kenneth.jsonparsing;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.kenneth.jsonparsing.pojo.SimpleTestCaseJsonPOJO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -59,5 +60,23 @@ class JsonTest {
         } catch (JsonProcessingException e) {
             fail("testPhaseString JsonProcessingException Thrown!!!");
         }
+    }
+
+    @Test
+    void fromJson() throws JsonProcessingException {
+        simpleTestCase = "{\"title\": \"BYE!\"}";
+        JsonNode node = Json.parse(simpleTestCase);
+        SimpleTestCaseJsonPOJO pojo = Json.fromJson(node, SimpleTestCaseJsonPOJO.class);
+
+        assertEquals("BYE!", pojo.getTitle());
+    }
+
+    @Test
+    void convertStringToObj() throws JsonProcessingException {
+        simpleTestCase = "{\"title\": \"Harry Potter\"}";
+
+        SimpleTestCaseJsonPOJO pojo = Json.convertStringToObj(simpleTestCase, SimpleTestCaseJsonPOJO.class);
+
+        assertEquals("Harry Potter", pojo.getTitle());
     }
 }
