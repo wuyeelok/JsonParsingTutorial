@@ -26,4 +26,8 @@ public class Json {
     public static <T> T convertStringToObj(String jsonStr, Class<T> clazz) throws JsonProcessingException {
         return objectMapper.readValue(jsonStr, clazz);
     }
+
+    public static String convertObjToString(Object o) throws JsonProcessingException {
+        return objectMapper.writeValueAsString(o);
+    }
 }

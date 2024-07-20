@@ -11,10 +11,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class JsonTest {
 
     private String simpleTestCase;
+    private SimpleTestCaseJsonPOJO stpojo;
 
     @BeforeEach
     void setUp() {
         simpleTestCase = null;
+        stpojo = null;
     }
 
     @Test
@@ -100,4 +102,14 @@ class JsonTest {
     }
 
 
+    @Test
+    void convertObjToString() throws JsonProcessingException {
+        stpojo = new SimpleTestCaseJsonPOJO();
+        stpojo.setTitle("Orange");
+
+        String jsonStr = Json.convertObjToString(stpojo);
+        String expectedJsonStr = "{\"title\":\"Orange\"}";
+
+        assertEquals(expectedJsonStr, jsonStr);
+    }
 }
