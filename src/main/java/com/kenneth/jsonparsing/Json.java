@@ -27,11 +27,19 @@ public class Json {
         return objectMapper.readValue(jsonStr, clazz);
     }
 
-    public static String convertObjToString(Object o) throws JsonProcessingException {
+    private static String convertObjToString(Object o) throws JsonProcessingException {
         return objectMapper.writeValueAsString(o);
     }
 
-    public static String convertObjToPrettyString(Object o) throws JsonProcessingException {
+    private static String convertObjToPrettyString(Object o) throws JsonProcessingException {
         return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(o);
+    }
+
+    public static String convertObjToJsonString(Object o, boolean enablePretty) throws JsonProcessingException {
+        if (enablePretty) {
+            return convertObjToPrettyString(o);
+        } else {
+            return convertObjToString(o);
+        }
     }
 }

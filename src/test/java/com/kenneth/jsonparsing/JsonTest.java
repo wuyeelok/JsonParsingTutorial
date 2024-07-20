@@ -106,7 +106,7 @@ class JsonTest {
         stpojo = new SimpleTestCaseJsonPOJO();
         stpojo.setTitle("Orange");
 
-        String jsonStr = Json.convertObjToString(stpojo);
+        String jsonStr = Json.convertObjToJsonString(stpojo, false);
         String expectedJsonStr = "{\"title\":\"Orange\"}";
 
         assertEquals(expectedJsonStr, jsonStr);
@@ -116,7 +116,7 @@ class JsonTest {
     void convertObjToStringNullCase() throws JsonProcessingException {
         stpojo = new SimpleTestCaseJsonPOJO();
 
-        String jsonStr = Json.convertObjToString(stpojo);
+        String jsonStr = Json.convertObjToJsonString(stpojo, false);
         String expectedJsonStr = "{\"title\":null}";
 
         assertEquals(expectedJsonStr, jsonStr);
@@ -127,7 +127,7 @@ class JsonTest {
         stpojo = new SimpleTestCaseJsonPOJO();
         stpojo.setTitle("Apple");
 
-        String jsonStr = Json.convertObjToPrettyString(stpojo);
+        String jsonStr = Json.convertObjToJsonString(stpojo, true);
         String expectedJsonStr = """
                 {
                   "title" : "Apple"
