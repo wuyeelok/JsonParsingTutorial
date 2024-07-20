@@ -121,4 +121,19 @@ class JsonTest {
 
         assertEquals(expectedJsonStr, jsonStr);
     }
+
+    @Test
+    void convertObjToPrettyString() throws JsonProcessingException {
+        stpojo = new SimpleTestCaseJsonPOJO();
+        stpojo.setTitle("Apple");
+
+        String jsonStr = Json.convertObjToPrettyString(stpojo);
+        String expectedJsonStr = """
+                {
+                  "title" : "Apple"
+                }""";
+        expectedJsonStr = expectedJsonStr.replaceAll("\n", "\r\n");
+
+        assertEquals(expectedJsonStr, jsonStr);
+    }
 }

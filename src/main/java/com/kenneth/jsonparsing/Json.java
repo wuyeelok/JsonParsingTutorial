@@ -30,4 +30,8 @@ public class Json {
     public static String convertObjToString(Object o) throws JsonProcessingException {
         return objectMapper.writeValueAsString(o);
     }
+
+    public static String convertObjToPrettyString(Object o) throws JsonProcessingException {
+        return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(o);
+    }
 }
