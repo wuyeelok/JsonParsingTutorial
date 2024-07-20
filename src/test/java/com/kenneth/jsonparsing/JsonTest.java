@@ -79,4 +79,25 @@ class JsonTest {
 
         assertEquals("Harry Potter", pojo.getTitle());
     }
+
+    @Test
+    void fromJsonNullProperties() throws JsonProcessingException {
+        simpleTestCase = "{\"title\": null}";
+        JsonNode node = Json.parse(simpleTestCase);
+
+        SimpleTestCaseJsonPOJO pojo = Json.convertStringToObj(simpleTestCase, SimpleTestCaseJsonPOJO.class);
+
+        assertNull(pojo.getTitle());
+    }
+
+    @Test
+    void fromJsonUnknownProperties() throws JsonProcessingException {
+        simpleTestCase = "{\"title\": \"BYE!\", \"author\": \"Tom\"}";
+        JsonNode node = Json.parse(simpleTestCase);
+        SimpleTestCaseJsonPOJO pojo = Json.fromJson(node, SimpleTestCaseJsonPOJO.class);
+
+        assertEquals("BYE!", pojo.getTitle());
+    }
+
+
 }
