@@ -85,7 +85,6 @@ class JsonTest {
     @Test
     void fromJsonNullProperties() throws JsonProcessingException {
         simpleTestCase = "{\"title\": null}";
-        JsonNode node = Json.parse(simpleTestCase);
 
         SimpleTestCaseJsonPOJO pojo = Json.convertStringToObj(simpleTestCase, SimpleTestCaseJsonPOJO.class);
 
@@ -109,6 +108,16 @@ class JsonTest {
 
         String jsonStr = Json.convertObjToString(stpojo);
         String expectedJsonStr = "{\"title\":\"Orange\"}";
+
+        assertEquals(expectedJsonStr, jsonStr);
+    }
+
+    @Test
+    void convertObjToStringNullCase() throws JsonProcessingException {
+        stpojo = new SimpleTestCaseJsonPOJO();
+
+        String jsonStr = Json.convertObjToString(stpojo);
+        String expectedJsonStr = "{\"title\":null}";
 
         assertEquals(expectedJsonStr, jsonStr);
     }
