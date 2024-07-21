@@ -15,14 +15,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class JsonTest {
 
     private String simpleTestCase;
-    private SimpleTestCaseJsonPOJO stpojo;
+    private SimpleTestCaseJsonPOJO simplePOJO;
 
     private String complexTestCase;
 
     @BeforeEach
     void setUp() {
         simpleTestCase = null;
-        stpojo = null;
+        simplePOJO = null;
         complexTestCase = null;
     }
 
@@ -110,10 +110,10 @@ class JsonTest {
 
     @Test
     void convertObjToString() throws JsonProcessingException {
-        stpojo = new SimpleTestCaseJsonPOJO();
-        stpojo.setTitle("Orange");
+        simplePOJO = new SimpleTestCaseJsonPOJO();
+        simplePOJO.setTitle("Orange");
 
-        String jsonStr = Json.convertObjToJsonString(stpojo, false);
+        String jsonStr = Json.convertObjToJsonString(simplePOJO, false);
         String expectedJsonStr = "{\"title\":\"Orange\"}";
 
         assertEquals(expectedJsonStr, jsonStr);
@@ -121,9 +121,9 @@ class JsonTest {
 
     @Test
     void convertObjToStringNullCase() throws JsonProcessingException {
-        stpojo = new SimpleTestCaseJsonPOJO();
+        simplePOJO = new SimpleTestCaseJsonPOJO();
 
-        String jsonStr = Json.convertObjToJsonString(stpojo, false);
+        String jsonStr = Json.convertObjToJsonString(simplePOJO, false);
         String expectedJsonStr = "{\"title\":null}";
 
         assertEquals(expectedJsonStr, jsonStr);
@@ -131,10 +131,10 @@ class JsonTest {
 
     @Test
     void convertObjToPrettyString() throws JsonProcessingException {
-        stpojo = new SimpleTestCaseJsonPOJO();
-        stpojo.setTitle("Apple");
+        simplePOJO = new SimpleTestCaseJsonPOJO();
+        simplePOJO.setTitle("Apple");
 
-        String jsonStr = Json.convertObjToJsonString(stpojo, true);
+        String jsonStr = Json.convertObjToJsonString(simplePOJO, true);
         String expectedJsonStr = """
                 {
                   "title" : "Apple"
