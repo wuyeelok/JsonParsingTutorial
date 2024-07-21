@@ -4,6 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
+import java.util.TimeZone;
 
 public class Json {
 
@@ -11,6 +14,9 @@ public class Json {
 
     private static ObjectMapper getDefaultObjectMapper() {
         ObjectMapper defaultObjectMapper = new ObjectMapper();
+
+        defaultObjectMapper.registerModule(new JavaTimeModule());
+
         defaultObjectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         return defaultObjectMapper;
     }
@@ -24,6 +30,7 @@ public class Json {
     }
 
     public static <T> T convertStringToObj(String jsonStr, Class<T> clazz) throws JsonProcessingException {
+        // objectMapper.setTimeZone(TimeZone.getTimeZone("Hongkong"));
         return objectMapper.readValue(jsonStr, clazz);
     }
 

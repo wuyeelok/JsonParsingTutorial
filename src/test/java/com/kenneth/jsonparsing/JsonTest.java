@@ -2,9 +2,16 @@ package com.kenneth.jsonparsing;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.kenneth.jsonparsing.pojo.EventPojo;
 import com.kenneth.jsonparsing.pojo.SimpleTestCaseJsonPOJO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,10 +20,13 @@ class JsonTest {
     private String simpleTestCase;
     private SimpleTestCaseJsonPOJO stpojo;
 
+    private String complexTestCase;
+
     @BeforeEach
     void setUp() {
         simpleTestCase = null;
         stpojo = null;
+        complexTestCase = null;
     }
 
     @Test
@@ -135,5 +145,36 @@ class JsonTest {
         expectedJsonStr = expectedJsonStr.replaceAll("\n", "\r\n");
 
         assertEquals(expectedJsonStr, jsonStr);
+    }
+
+//    @Test
+//    void convertComplexStringToObjDate() throws JsonProcessingException, ParseException {
+//        complexTestCase = """
+//                {
+//                  "date": "2024-02-01",
+//                  "name": "Reborn"
+//                }""";
+//
+//        EventPojo pojo = Json.convertStringToObj(complexTestCase, EventPojo.class);
+//
+//        assertEquals("Reborn", pojo.getName());
+//
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        Date expectedDate = sdf.parse("2024-02-01");
+//
+//        assertEquals(expectedDate, pojo.getDate());
+//    }
+
+    @Test
+    void convertComplexStringToObjLocalDate() throws JsonProcessingException, ParseException {
+        complexTestCase = """
+                {
+                  "dateNew": "2024-02-01",
+                  "name": "Reborn"
+                }""";
+
+        EventPojo pojo = Json.convertStringToObj(complexTestCase, EventPojo.class);
+        assertEquals("Reborn", pojo.getName());
+        assertEquals(LocalDate.of(2024,2,1), pojo.getDateNew());
     }
 }
