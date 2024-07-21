@@ -8,11 +8,7 @@ import com.kenneth.jsonparsing.pojo.SimpleTestCaseJsonPOJO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -148,26 +144,28 @@ class JsonTest {
         assertEquals(expectedJsonStr, jsonStr);
     }
 
-//    @Test
-//    void convertComplexStringToObjDate() throws JsonProcessingException, ParseException {
-//        complexTestCase = """
-//                {
-//                  "date": "2024-02-01",
-//                  "name": "Reborn"
-//                }""";
-//
-//        EventPojo pojo = Json.convertStringToObj(complexTestCase, EventPojo.class);
-//
-//        assertEquals("Reborn", pojo.getName());
-//
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//        Date expectedDate = sdf.parse("2024-02-01");
-//
-//        assertEquals(expectedDate, pojo.getDate());
-//    }
+    /*
+    @Test
+    void convertComplexStringToObjDate() throws JsonProcessingException, ParseException {
+        complexTestCase = """
+                {
+                  "date": "2024-02-01",
+                  "name": "Reborn"
+                }""";
+
+        EventPojo pojo = Json.convertStringToObj(complexTestCase, EventPojo.class);
+
+        assertEquals("Reborn", pojo.getName());
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date expectedDate = sdf.parse("2024-02-01");
+
+        assertEquals(expectedDate, pojo.getDate());
+    }
+    */
 
     @Test
-    void convertComplexStringToObjLocalDate() throws JsonProcessingException, ParseException {
+    void convertComplexStringToObjLocalDate() throws JsonProcessingException {
         complexTestCase = """
                 {
                   "dateNew": "2024-02-01",
@@ -180,7 +178,7 @@ class JsonTest {
     }
 
     @Test
-    void convertComplexStringToObjMoreThan1Depth() throws JsonProcessingException, ParseException {
+    void convertComplexStringToObjMoreThan1Depth() throws JsonProcessingException {
         complexTestCase = """
                 {
                   "authorName": "John",
