@@ -2,6 +2,7 @@ package com.kenneth.jsonparsing;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.kenneth.jsonparsing.pojo.AuthorPojo;
 import com.kenneth.jsonparsing.pojo.EventPojo;
 import com.kenneth.jsonparsing.pojo.SimpleTestCaseJsonPOJO;
 import org.junit.jupiter.api.BeforeEach;
@@ -175,6 +176,31 @@ class JsonTest {
 
         EventPojo pojo = Json.convertStringToObj(complexTestCase, EventPojo.class);
         assertEquals("Reborn", pojo.getName());
-        assertEquals(LocalDate.of(2024,2,1), pojo.getDateNew());
+        assertEquals(LocalDate.of(2024, 2, 1), pojo.getDateNew());
+    }
+
+    @Test
+    void convertComplexStringToObjMoreThan1Depth() throws JsonProcessingException, ParseException {
+        complexTestCase = """
+                {
+                  "authorName": "John",
+                  "books": [
+                    {
+                        "title": "title1",
+                        "inPrint": true,
+                        "publishDate": "2024-05-19"
+                    },
+                    {
+                        "title": "title1",
+                        "inPrint": false,
+                        "publishDate": "2020-12-25"
+                    }
+                  ]
+                }""";
+
+        AuthorPojo pojo = Json.convertStringToObj(complexTestCase, AuthorPojo.class);
+        assertEquals("John", pojo.getAuthorName());
+        assertTrue(pojo.getBooks().get(0).isInPrint());
+        assertEquals(LocalDate.of(2020, 12, 25), pojo.getBooks().get(1).getPublishDate());
     }
 }
